@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/app/components/ui/card"
+import { Badge } from "@/src/app/components/ui/badge"
 import { format } from "date-fns"
 
 interface Task {
