@@ -57,6 +57,7 @@ export function TaskForm({ onTaskAdded }: { onTaskAdded: () => void }) {
             selected={dueDate}
             onSelect={setDueDate}
             initialFocus
+            className='bg-white'
           />
         </PopoverContent>
       </Popover>

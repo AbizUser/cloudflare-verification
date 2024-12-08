@@ -37,10 +37,10 @@ export default function Home() {
               </Button> */}
             </DialogTrigger>
             {/* <DialogContent className='![&>*]:bg-red-111 !z-1000 !opacity-100'> */}
+            {/* <DialogOverlay className="bg-black/20" /> */}
             <DialogOverlay className="bg-black/30" />
             {/* <DialogContent> */}
-            <DialogContent className='bg-white !z-9999'>
-            {/* <DialogContent className='!bg-white !z-9999 !opacity-100'> */}
+            <DialogContent className='!bg-white !z-9999 !opacity-100'>
               <DialogHeader>
                 <DialogTitle>新規タスクの追加</DialogTitle>
               </DialogHeader>
