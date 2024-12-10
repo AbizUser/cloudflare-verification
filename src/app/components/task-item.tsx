@@ -18,9 +18,10 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
   }[task.status]
 
   return (
-    <Card className="max-w-60 mt-0 min-h-30">
+    // <Card className="max-w-60 mt-0 min-h-30">
+    <Card className="w-72 h-60 mt-0 min-h-30">
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
+        <CardTitle className="flex justify-between items-center ">
           {task.title}
           <Badge className={statusColor}>{task.status}</Badge>
         </CardTitle>
