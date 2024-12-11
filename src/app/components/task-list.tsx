@@ -36,9 +36,7 @@ export function TaskList({ view }: TaskListProps) {
   })
 
   return (
-    // <div className=" flex gap-4 flex-wrap ">
     <div className="flex flex-row flex-wrap justify-center gap-4" style={{ width: '100%' }}>
-    {/* <div className=" flex gap-2"> */}
       {filteredTasks.map((task) => (
         <TaskItem key={task.id} task={task} onTaskUpdated={fetchTasks} />
       ))}

@@ -31,10 +31,6 @@ export default function Home() {
             onOpenChange={setIsFormOpen}
             >
             <DialogTrigger asChild>
-              {/* <Button onClick={handleCreateTask}>
-                <PlusIcon className="mr-2 h-4 w-4" />
-                新規タスク
-              </Button> */}
             </DialogTrigger>
             {/* <DialogContent className='![&>*]:bg-red-111 !z-1000 !opacity-100'> */}
             {/* <DialogOverlay className="bg-black/20" /> */}

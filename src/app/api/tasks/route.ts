@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'  // Drizzle ORMのインスタンスをインポート
 import { tasks } from '@/src/db/schema'  // スキーマ定義をインポート
 import { getTaskStatus } from '@/lib/taskHelpers'
-// import { eq } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { v4 as uuidv4 } from 'uuid'  // UUIDを生成するためのライブラリ
 
 export async function GET() {
@@ -26,4 +26,19 @@ export async function POST(request: Request) {
   
   const insertedTask = await db.insert(tasks).values(newTask).returning()
   return NextResponse.json(insertedTask[0])
+}
+
+export async function PUT(request: Request) {
+  const body = await request.json()
+  const { id, status } = body
+
+  const updatedTask = await db.update(tasks)
+    .set({ 
+      status: status,
+      updatedAt: new Date()
+    })
+    .where(eq(tasks.id, id))
+    .returning()
+
+  return NextResponse.json(updatedTask[0])
 }

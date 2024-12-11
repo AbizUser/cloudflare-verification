@@ -34,7 +34,6 @@ export function Sidebar({ onViewChange, onCreateTask }: SidebarProps) {
       {!isMobile && <h2 className="text-xl font-bold mb-4 px-4 pt-4">TaskManager</h2>}
       <div className="w-full space-y-2 mt-4">
         <Button
-          // className={buttonClass}
           className={`${buttonClass} ${'hover:bg-slate-50'}`}
           variant="ghost"
           onClick={onCreateTask}
