@@ -8,10 +8,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/src/app/components/ui
 import { format } from "date-fns";
 import { CalendarIcon } from 'lucide-react';
 
+
 interface TaskEditModalProps {
   isOpen: boolean;
   onClose: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   task: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSave: (updatedTask: any) => void;
 }
 
