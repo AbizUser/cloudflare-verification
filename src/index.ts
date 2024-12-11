@@ -4,7 +4,7 @@
 
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { eq } from 'drizzle-orm';
+// import { eq } from 'drizzle-orm';
 import { tasks } from './db/schema';
   
 const db = drizzle(process.env.DATABASE_URL!);
@@ -12,6 +12,8 @@ const db = drizzle(process.env.DATABASE_URL!);
 // import { db } from './db';  // Drizzle ORMのインスタンス
 // import { tasks } from './schema';  // スキーマ定義
 import { v4 as uuidv4 } from 'uuid';  // UUIDを生成するためのライブラリ
+
+//シードデータの生成処理
 
 async function insertTask() {
   const newTask = {

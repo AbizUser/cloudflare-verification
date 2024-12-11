@@ -13,6 +13,8 @@ export function TaskForm({ onTaskAdded }: { onTaskAdded: () => void }) {
   const [description, setDescription] = useState('')
   const [dueDate, setDueDate] = useState<Date>()
 
+  const commonClasses = 'border border-solid hover:border-yellow-400'
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!title || !dueDate) return
@@ -34,20 +36,22 @@ export function TaskForm({ onTaskAdded }: { onTaskAdded: () => void }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <Input
-        placeholder="タスクのタイトル"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
+        className={`${commonClasses}`}
       />
       <Textarea
-        placeholder="タスクの詳細"
+        placeholder="Detail"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        className={`${commonClasses}`}
       />
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline">
-            {dueDate ? format(dueDate, "PPP") : <span>期限日を選択</span>}
+          <Button variant="outline" className={`${commonClasses}`}>
+            {dueDate ? format(dueDate, "PPP") : <span>DueDate</span>}
             <CalendarIcon className="ml-2 h-4 w-4" />
           </Button>
         </PopoverTrigger>
@@ -61,7 +65,7 @@ export function TaskForm({ onTaskAdded }: { onTaskAdded: () => void }) {
           />
         </PopoverContent>
       </Popover>
-      <Button type="submit">タスクを追加</Button>
+      <Button type="submit" className={`ml-2 ${commonClasses}`}>Add Task</Button>
     </form>
   )
 }

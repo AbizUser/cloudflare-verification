@@ -39,6 +39,7 @@ export default function Home() {
             <DialogContent className='!bg-white !z-9999 !opacity-100'>
               <DialogHeader>
                 <DialogTitle>新規タスクの追加</DialogTitle>
+                
               </DialogHeader>
               <TaskForm onTaskAdded={handleTaskAdded} />
             </DialogContent>
