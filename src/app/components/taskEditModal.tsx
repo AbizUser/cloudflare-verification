@@ -29,11 +29,11 @@ export function TaskEditModal({ isOpen, onClose, task, onSave }: TaskEditModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className='h-auto'>
         <DialogHeader>
-          <DialogTitle>タスクの編集</DialogTitle>
+          <DialogTitle>Edit Task</DialogTitle>
         </DialogHeader>
-        <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className="space-y-4">
+        <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className="space-y-5">
           <Input
             value={editedTask.title}
             onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
@@ -45,7 +45,7 @@ export function TaskEditModal({ isOpen, onClose, task, onSave }: TaskEditModalPr
             value={editedTask.description}
             onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
             placeholder="Detail"
-            className={`${commonClasses}`}
+            className={`${commonClasses} h-auto`}
           />
           <Popover>
             <PopoverTrigger asChild>
