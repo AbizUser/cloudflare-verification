@@ -9,6 +9,8 @@ interface SidebarProps {
   onCreateTask: () => void
 }
 
+  // const fontColorClasses = 'text-gray-500'
+
 export function Sidebar({ onViewChange, onCreateTask }: SidebarProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [currentView, setCurrentView] = useState<'all' | 'expired' | 'completed'>('all')
@@ -31,7 +33,7 @@ export function Sidebar({ onViewChange, onCreateTask }: SidebarProps) {
 
   return (
     <div className={`${isMobile ? 'max-w-14 min-w-14 p-0 pt-16' : 'w-42'} bg-gray-100 h-screen flex flex-col`}>
-      {!isMobile && <h2 className="text-xl font-bold mb-4 px-4 pt-4">TaskManager</h2>}
+      {!isMobile && <h2 className={`text-xl font-bold mb-4 px-4 pt-4 text-gray-600`}>TaskManager</h2>}
       <div className="w-full space-y-2 mt-4">
         <Button
           className={`${buttonClass} ${'hover:bg-slate-50'}`}

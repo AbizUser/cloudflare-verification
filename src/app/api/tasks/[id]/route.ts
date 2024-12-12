@@ -36,3 +36,15 @@ export async function PUT(
     return NextResponse.json({ error: "Failed to update task" }, { status: 500 })
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
+  // ここでデータベースからタスクを削除する処理を実装
+   await db.delete(tasks)
+    .where(eq(tasks.id, id));
+   
+  return NextResponse.json({ message: 'Task deleted' });
+}

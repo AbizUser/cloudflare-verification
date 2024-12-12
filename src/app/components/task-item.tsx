@@ -4,7 +4,7 @@ import { TaskEditModal } from '@/src/app/components/taskEditModal'
 import { useState } from 'react'
 import { SiJetpackcompose } from "react-icons/si";
 import { BsPencilSquare } from "react-icons/bs";
-
+import { AiOutlineDelete } from "react-icons/ai";
 
 interface Task {
   id: string
@@ -22,6 +22,12 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
     '完了': ' border-b-2 border-green-500',
     '期限切れ': 'border-b-2 border-red-500',
     '未完了': 'border-b-2 border-yellow-500',
+  }[task.status]
+
+  const statusBGColor = {
+    '完了': ' hover:bg-green-50',
+    '期限切れ': 'hover:bg-red-50',
+    '未完了': 'hover:bg-yellow-50',
   }[task.status]
 
   const handleTaskClick = () => {
@@ -51,6 +57,21 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
     }
   };
 
+  
+  const handleDeleteTask = async (taskId: string) => {
+    const response = await fetch(`/api/tasks/${taskId}`, {
+      method: 'DELETE',
+    });
+  
+    if (response.ok) {
+      onTaskUpdated();
+    } else {
+      console.error('Failed to delete task');
+    }
+  };
+  
+  
+  
   const handleSaveTask = async (updatedTask: Task) => {
     console.log("handleSaveTask")
     const response = await fetch(`/api/tasks/${updatedTask.id}`, {
@@ -66,23 +87,24 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
   
   return (
     <>
-    <Card className="w-60 h-52 mt-0 min-h-30 relative">
+    <Card className={`w-60 h-52 mt-0 min-h-30 relative ${statusBGColor}`}>
       <CardHeader className="pb-1">
-        <CardTitle className="flex justify-between items-center text-ellipsis line-clamp-1 break-words text-2xl">
+        <CardTitle className="flex justify-between items-center text-ellipsis line-clamp-1 break-words text-2xl text-gray-600">
           {task.title}
         </CardTitle>
       </CardHeader>
       <CardContent >
         <p className="line-clamp-4 break-words text-ellipsis">{task.description}</p>
         <CardDescription className="mt-2 absolute bottom-4 flex  items-end">
-          <p className={`text-gray-700 mt-0.5 border-b-2  border-red-500 ${statusColor}`}>
+          <p className={`text-gray-500 mt-0.5 border-b-2  border-red-500 ${statusColor}`}>
           {format(new Date(task.dueDate), "yyyy/MM/dd")}
           </p>
         <SiJetpackcompose
-          className="text-gray-700 mt-1 size-4 ml-20 mb-0.5 cursor-pointer hover:opacity-70"
+          className="text-gray-700 mt-1 size-4 ml-14 mb-0.5 cursor-pointer hover:opacity-70"
           onClick={() => updateTaskStatus(task.id, task.status === '完了' ? '未完了' : '完了')}
         ></SiJetpackcompose>
-          <BsPencilSquare className="cursor-pointer hover:opacity-30 size-4 text-gray-700 ml-3 mb-0.5" onClick={handleTaskClick}/>        
+          <BsPencilSquare className="cursor-pointer hover:opacity-30 size-4 text-gray-700 ml-3 mb-0.5" onClick={handleTaskClick}/> 
+          <AiOutlineDelete className="cursor-pointer hover:opacity-30 size-4 text-gray-700 ml-3 mb-0.5" onClick={() => handleDeleteTask(task.id)}/>
         </CardDescription>
       </CardContent>
     </Card>
