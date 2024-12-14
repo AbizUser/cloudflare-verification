@@ -30,21 +30,27 @@ export function Sidebar({ onViewChange, onCreateTask }: SidebarProps) {
     onViewChange(view)
   }
 
-//   //mainとサイドバーの縦幅を比較して広い方をサイドバーに反映させる
-function adjustSidebarHeight() {
-  const mainElement = document.querySelector<HTMLElement>('.width');
-  const sidebarElement = document.querySelector<HTMLElement>('.sidebar');
-  if (!mainElement || !sidebarElement) return;
+useEffect(() => {
+  function adjustSidebarHeight() {
+    const mainElement = document.querySelector<HTMLElement>('.width');
+    const sidebarElement = document.querySelector<HTMLElement>('.sidebar');
+    if (!mainElement || !sidebarElement) return;
 
-  const mainHeight = mainElement.offsetHeight;
-  const screenHeight = window.innerHeight;
-  const newHeight = Math.max(mainHeight, screenHeight);
+    const mainHeight = mainElement.offsetHeight;
+    const screenHeight = window.innerHeight;
+    const newHeight = Math.max(mainHeight, screenHeight);
 
-  sidebarElement.style.height = newHeight + 'px';
-}
-// ページ読み込み時とリサイズ時に関数を呼び出す
-document.addEventListener('DOMContentLoaded', adjustSidebarHeight);
-window.addEventListener('resize', adjustSidebarHeight);
+    sidebarElement.style.height = newHeight + 'px';
+  }
+
+  window.addEventListener('resize', adjustSidebarHeight);
+  adjustSidebarHeight(); // 初回実行
+
+  return () => window.removeEventListener('resize', adjustSidebarHeight);
+}, []);
+
+
+
 
   return (
     <div className={`sidebar ${isMobile ? 'max-w-14 min-w-14 p-0 pt-16' : 'w-42'} bg-gray-100 flex flex-col h-screen`}>
