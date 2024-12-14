@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { SiJetpackcompose } from "react-icons/si";
 import { BsPencilSquare } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 interface Task {
   id: string
@@ -15,7 +16,7 @@ interface Task {
 }
 
 export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: () => void }) {
-
+  const router = useRouter();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const statusColor = {
@@ -32,7 +33,6 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
 
   const handleTaskClick = () => {
     setIsEditModalOpen(true);
-    console.log("handleTaskClick")
   };
 
   function isTaskExpired(dueDate: string): boolean {
@@ -45,18 +45,17 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
     if (newStatus === '未完了' && isTaskExpired(task.dueDate)) {
       newStatus = '期限切れ';
     }
-
     const response = await fetch('/api/tasks', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: taskId, status: newStatus }),
     });
-  
+    
     if (response.ok) {
       onTaskUpdated();
+      router.push('/');
     }
   };
-
   
   const handleDeleteTask = async (taskId: string) => {
     const response = await fetch(`/api/tasks/${taskId}`, {
@@ -65,13 +64,12 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
   
     if (response.ok) {
       onTaskUpdated();
+      router.push('/');
     } else {
       console.error('Failed to delete task');
     }
   };
-  
-  
-  
+
   const handleSaveTask = async (updatedTask: Task) => {
     console.log("handleSaveTask")
     const response = await fetch(`/api/tasks/${updatedTask.id}`, {
@@ -81,6 +79,7 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
     });
 
     if (response.ok) {
+      router.push('/');
       onTaskUpdated();
     }
   };
@@ -96,7 +95,7 @@ export function TaskItem({ task, onTaskUpdated }: { task: Task; onTaskUpdated: (
       <CardContent >
         <p className="line-clamp-4 break-words text-ellipsis">{task.description}</p>
         <CardDescription className="mt-2 absolute bottom-4 flex  items-end">
-          <p className={`text-gray-500 mt-0.5 border-b-2  border-red-500 ${statusColor}`}>
+          <p className={`text-gray-500 mt-0.5 border-b-2 ${statusColor}`}>
           {format(new Date(task.dueDate), "yyyy/MM/dd")}
           </p>
         <SiJetpackcompose

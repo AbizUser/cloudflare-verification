@@ -7,6 +7,8 @@ import { Calendar } from "@/src/app/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/app/components/ui/popover";
 import { format } from "date-fns";
 import { CalendarIcon } from 'lucide-react';
+// import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 interface TaskEditModalProps {
@@ -18,13 +20,17 @@ interface TaskEditModalProps {
   onSave: (updatedTask: any) => void;
 }
 
+
+
+
 export function TaskEditModal({ isOpen, onClose, task, onSave }: TaskEditModalProps) {
   const [editedTask, setEditedTask] = useState(task);
   const commonClasses = 'border border-solid hover:border-yellow-400'
-
+  const router = useRouter();
   const handleSave = () => {
     onSave(editedTask);
     onClose();
+    router.push('/');
   };
 
   return (

@@ -65,7 +65,7 @@ export function TaskForm({ onTaskAdded }: { onTaskAdded: () => void }) {
           />
         </PopoverContent>
       </Popover>
-      <Button type="submit" className={`ml-2 ${commonClasses}`}>Add Task</Button>
+      <Button type="submit" className={`ml-2 ${commonClasses}`} >Add Task</Button>
     </form>
   )
 }
