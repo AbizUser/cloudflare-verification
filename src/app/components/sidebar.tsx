@@ -49,9 +49,6 @@ useEffect(() => {
   return () => window.removeEventListener('resize', adjustSidebarHeight);
 }, []);
 
-
-
-
   return (
     <div className={`sidebar ${isMobile ? 'max-w-14 min-w-14 p-0 pt-16' : 'w-42'} bg-gray-100 flex flex-col h-screen`}>
       {!isMobile && <h2 className={`text-xl font-bold mb-4 px-4 pt-4 text-gray-600`}>TaskManager</h2>}
